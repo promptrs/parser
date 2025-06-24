@@ -1,0 +1,25 @@
+package promptrs:parser@0.1.0;
+
+interface response {
+	record delims {
+		reasoning: option<tuple<string, string>>,
+		tool-call: tuple<string, string>,
+	}
+
+	record tool-call {
+		name: string,
+		arguments: list<tuple<string, string>>,
+	}
+
+	record response {
+		reasoning: option<string>,
+		content: string,
+		tool-calls: list<tool-call>,
+	}
+
+	parse: func(response: string, delims: option<delims>) -> response;
+}
+
+world parser {
+	export response;
+}
