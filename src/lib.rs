@@ -2,8 +2,7 @@
 mod bindings;
 
 use bindings::exports::promptrs::parser::response::{Delims, Guest, Response, ToolCall};
-use serde::{Deserialize, Deserializer};
-use std::collections::HashMap;
+use serde::Deserialize;
 use winnow::combinator::{empty, opt, repeat, seq};
 use winnow::error::ParserError;
 use winnow::token::take_until;
@@ -68,7 +67,7 @@ fn parse_args(list: Vec<&str>) -> Vec<ToolCall> {
 		.map(|tc| {
 			serde_json::from_str(tc).unwrap_or(ToolCallDef {
 				name: "".into(),
-				arguments: vec![],
+				arguments: "".into(),
 			})
 		})
 		.map(|ToolCallDef { name, arguments }| ToolCall { name, arguments })
@@ -78,15 +77,7 @@ fn parse_args(list: Vec<&str>) -> Vec<ToolCall> {
 #[derive(Deserialize)]
 struct ToolCallDef {
 	name: String,
-	#[serde(deserialize_with = "deserialize_args")]
-	arguments: Vec<(String, String)>,
-}
-
-fn deserialize_args<'de, D: Deserializer<'de>>(
-	deserializer: D,
-) -> Result<Vec<(String, String)>, D::Error> {
-	let map = HashMap::<String, String>::deserialize(deserializer)?;
-	Ok(map.into_iter().collect())
+	arguments: String,
 }
 
 bindings::export!(Component with_types_in bindings);

@@ -1,4 +1,4 @@
-package promptrs:parser@0.1.0;
+package promptrs:parser@0.2.0;
 
 interface response {
 	record delims {
@@ -8,7 +8,7 @@ interface response {
 
 	record tool-call {
 		name: string,
-		arguments: list<tuple<string, string>>,
+		arguments: string,
 	}
 
 	record response {

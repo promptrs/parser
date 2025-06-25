@@ -31,7 +31,7 @@ pub mod exports {
                 #[derive(Clone)]
                 pub struct ToolCall {
                     pub name: _rt::String,
-                    pub arguments: _rt::Vec<(_rt::String, _rt::String)>,
+                    pub arguments: _rt::String,
                 }
                 impl ::core::fmt::Debug for ToolCall {
                     fn fmt(
@@ -165,23 +165,23 @@ pub mod exports {
                     *ptr6
                         .add(3 * ::core::mem::size_of::<*const u8>())
                         .cast::<*mut u8>() = ptr9.cast_mut();
-                    let vec16 = tool_calls7;
-                    let len16 = vec16.len();
-                    let layout16 = _rt::alloc::Layout::from_size_align_unchecked(
-                        vec16.len() * (4 * ::core::mem::size_of::<*const u8>()),
+                    let vec13 = tool_calls7;
+                    let len13 = vec13.len();
+                    let layout13 = _rt::alloc::Layout::from_size_align_unchecked(
+                        vec13.len() * (4 * ::core::mem::size_of::<*const u8>()),
                         ::core::mem::size_of::<*const u8>(),
                     );
-                    let result16 = if layout16.size() != 0 {
-                        let ptr = _rt::alloc::alloc(layout16).cast::<u8>();
+                    let result13 = if layout13.size() != 0 {
+                        let ptr = _rt::alloc::alloc(layout13).cast::<u8>();
                         if ptr.is_null() {
-                            _rt::alloc::handle_alloc_error(layout16);
+                            _rt::alloc::handle_alloc_error(layout13);
                         }
                         ptr
                     } else {
                         ::core::ptr::null_mut()
                     };
-                    for (i, e) in vec16.into_iter().enumerate() {
-                        let base = result16
+                    for (i, e) in vec13.into_iter().enumerate() {
+                        let base = result13
                             .add(i * (4 * ::core::mem::size_of::<*const u8>()));
                         {
                             let ToolCall { name: name10, arguments: arguments10 } = e;
@@ -193,58 +193,22 @@ pub mod exports {
                                 .add(::core::mem::size_of::<*const u8>())
                                 .cast::<usize>() = len11;
                             *base.add(0).cast::<*mut u8>() = ptr11.cast_mut();
-                            let vec15 = arguments10;
-                            let len15 = vec15.len();
-                            let layout15 = _rt::alloc::Layout::from_size_align_unchecked(
-                                vec15.len() * (4 * ::core::mem::size_of::<*const u8>()),
-                                ::core::mem::size_of::<*const u8>(),
-                            );
-                            let result15 = if layout15.size() != 0 {
-                                let ptr = _rt::alloc::alloc(layout15).cast::<u8>();
-                                if ptr.is_null() {
-                                    _rt::alloc::handle_alloc_error(layout15);
-                                }
-                                ptr
-                            } else {
-                                ::core::ptr::null_mut()
-                            };
-                            for (i, e) in vec15.into_iter().enumerate() {
-                                let base = result15
-                                    .add(i * (4 * ::core::mem::size_of::<*const u8>()));
-                                {
-                                    let (t12_0, t12_1) = e;
-                                    let vec13 = (t12_0.into_bytes()).into_boxed_slice();
-                                    let ptr13 = vec13.as_ptr().cast::<u8>();
-                                    let len13 = vec13.len();
-                                    ::core::mem::forget(vec13);
-                                    *base
-                                        .add(::core::mem::size_of::<*const u8>())
-                                        .cast::<usize>() = len13;
-                                    *base.add(0).cast::<*mut u8>() = ptr13.cast_mut();
-                                    let vec14 = (t12_1.into_bytes()).into_boxed_slice();
-                                    let ptr14 = vec14.as_ptr().cast::<u8>();
-                                    let len14 = vec14.len();
-                                    ::core::mem::forget(vec14);
-                                    *base
-                                        .add(3 * ::core::mem::size_of::<*const u8>())
-                                        .cast::<usize>() = len14;
-                                    *base
-                                        .add(2 * ::core::mem::size_of::<*const u8>())
-                                        .cast::<*mut u8>() = ptr14.cast_mut();
-                                }
-                            }
+                            let vec12 = (arguments10.into_bytes()).into_boxed_slice();
+                            let ptr12 = vec12.as_ptr().cast::<u8>();
+                            let len12 = vec12.len();
+                            ::core::mem::forget(vec12);
                             *base
                                 .add(3 * ::core::mem::size_of::<*const u8>())
-                                .cast::<usize>() = len15;
+                                .cast::<usize>() = len12;
                             *base
                                 .add(2 * ::core::mem::size_of::<*const u8>())
-                                .cast::<*mut u8>() = result15;
+                                .cast::<*mut u8>() = ptr12.cast_mut();
                         }
                     }
-                    *ptr6.add(6 * ::core::mem::size_of::<*const u8>()).cast::<usize>() = len16;
+                    *ptr6.add(6 * ::core::mem::size_of::<*const u8>()).cast::<usize>() = len13;
                     *ptr6
                         .add(5 * ::core::mem::size_of::<*const u8>())
-                        .cast::<*mut u8>() = result16;
+                        .cast::<*mut u8>() = result13;
                     ptr6
                 }
                 #[doc(hidden)]
@@ -276,10 +240,10 @@ pub mod exports {
                     let l6 = *arg0
                         .add(6 * ::core::mem::size_of::<*const u8>())
                         .cast::<usize>();
-                    let base16 = l5;
-                    let len16 = l6;
-                    for i in 0..len16 {
-                        let base = base16
+                    let base11 = l5;
+                    let len11 = l6;
+                    for i in 0..len11 {
+                        let base = base11
                             .add(i * (4 * ::core::mem::size_of::<*const u8>()));
                         {
                             let l7 = *base.add(0).cast::<*mut u8>();
@@ -293,36 +257,12 @@ pub mod exports {
                             let l10 = *base
                                 .add(3 * ::core::mem::size_of::<*const u8>())
                                 .cast::<usize>();
-                            let base15 = l9;
-                            let len15 = l10;
-                            for i in 0..len15 {
-                                let base = base15
-                                    .add(i * (4 * ::core::mem::size_of::<*const u8>()));
-                                {
-                                    let l11 = *base.add(0).cast::<*mut u8>();
-                                    let l12 = *base
-                                        .add(::core::mem::size_of::<*const u8>())
-                                        .cast::<usize>();
-                                    _rt::cabi_dealloc(l11, l12, 1);
-                                    let l13 = *base
-                                        .add(2 * ::core::mem::size_of::<*const u8>())
-                                        .cast::<*mut u8>();
-                                    let l14 = *base
-                                        .add(3 * ::core::mem::size_of::<*const u8>())
-                                        .cast::<usize>();
-                                    _rt::cabi_dealloc(l13, l14, 1);
-                                }
-                            }
-                            _rt::cabi_dealloc(
-                                base15,
-                                len15 * (4 * ::core::mem::size_of::<*const u8>()),
-                                ::core::mem::size_of::<*const u8>(),
-                            );
+                            _rt::cabi_dealloc(l9, l10, 1);
                         }
                     }
                     _rt::cabi_dealloc(
-                        base16,
-                        len16 * (4 * ::core::mem::size_of::<*const u8>()),
+                        base11,
+                        len11 * (4 * ::core::mem::size_of::<*const u8>()),
                         ::core::mem::size_of::<*const u8>(),
                     );
                 }
@@ -330,23 +270,23 @@ pub mod exports {
                     fn parse(response: _rt::String, delims: Option<Delims>) -> Response;
                 }
                 #[doc(hidden)]
-                macro_rules! __export_promptrs_parser_response_0_1_0_cabi {
+                macro_rules! __export_promptrs_parser_response_0_2_0_cabi {
                     ($ty:ident with_types_in $($path_to_types:tt)*) => {
                         const _ : () = { #[unsafe (export_name =
-                        "promptrs:parser/response@0.1.0#parse")] unsafe extern "C" fn
+                        "promptrs:parser/response@0.2.0#parse")] unsafe extern "C" fn
                         export_parse(arg0 : * mut u8, arg1 : usize, arg2 : i32, arg3 :
                         i32, arg4 : * mut u8, arg5 : usize, arg6 : * mut u8, arg7 :
                         usize, arg8 : * mut u8, arg9 : usize, arg10 : * mut u8, arg11 :
                         usize,) -> * mut u8 { unsafe { $($path_to_types)*::
                         _export_parse_cabi::<$ty > (arg0, arg1, arg2, arg3, arg4, arg5,
                         arg6, arg7, arg8, arg9, arg10, arg11) } } #[unsafe (export_name =
-                        "cabi_post_promptrs:parser/response@0.1.0#parse")] unsafe extern
+                        "cabi_post_promptrs:parser/response@0.2.0#parse")] unsafe extern
                         "C" fn _post_return_parse(arg0 : * mut u8,) { unsafe {
                         $($path_to_types)*:: __post_return_parse::<$ty > (arg0) } } };
                     };
                 }
                 #[doc(hidden)]
-                pub(crate) use __export_promptrs_parser_response_0_1_0_cabi;
+                pub(crate) use __export_promptrs_parser_response_0_2_0_cabi;
                 #[cfg_attr(target_pointer_width = "64", repr(align(8)))]
                 #[cfg_attr(target_pointer_width = "32", repr(align(4)))]
                 struct _RetArea(
@@ -419,7 +359,7 @@ macro_rules! __export_parser_impl {
     };
     ($ty:ident with_types_in $($path_to_types_root:tt)*) => {
         $($path_to_types_root)*::
-        exports::promptrs::parser::response::__export_promptrs_parser_response_0_1_0_cabi!($ty
+        exports::promptrs::parser::response::__export_promptrs_parser_response_0_2_0_cabi!($ty
         with_types_in $($path_to_types_root)*:: exports::promptrs::parser::response);
     };
 }
@@ -427,19 +367,19 @@ macro_rules! __export_parser_impl {
 pub(crate) use __export_parser_impl as export;
 #[cfg(target_arch = "wasm32")]
 #[unsafe(
-    link_section = "component-type:wit-bindgen:0.41.0:promptrs:parser@0.1.0:parser:encoded world"
+    link_section = "component-type:wit-bindgen:0.41.0:promptrs:parser@0.2.0:parser:encoded world"
 )]
 #[doc(hidden)]
 #[allow(clippy::octal_escapes)]
-pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 376] = *b"\
-\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\xfb\x01\x01A\x02\x01\
-A\x02\x01B\x0e\x01o\x02ss\x01k\0\x01r\x02\x09reasoning\x01\x09tool-call\0\x04\0\x06\
-delims\x03\0\x02\x01p\0\x01r\x02\x04names\x09arguments\x04\x04\0\x09tool-call\x03\
-\0\x05\x01ks\x01p\x06\x01r\x03\x09reasoning\x07\x07contents\x0atool-calls\x08\x04\
-\0\x08response\x03\0\x09\x01k\x03\x01@\x02\x08responses\x06delims\x0b\0\x0a\x04\0\
-\x05parse\x01\x0c\x04\0\x1epromptrs:parser/response@0.1.0\x05\0\x04\0\x1cpromptr\
-s:parser/parser@0.1.0\x04\0\x0b\x0c\x01\0\x06parser\x03\0\0\0G\x09producers\x01\x0c\
-processed-by\x02\x0dwit-component\x070.227.1\x10wit-bindgen-rust\x060.41.0";
+pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 373] = *b"\
+\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\xf8\x01\x01A\x02\x01\
+A\x02\x01B\x0d\x01o\x02ss\x01k\0\x01r\x02\x09reasoning\x01\x09tool-call\0\x04\0\x06\
+delims\x03\0\x02\x01r\x02\x04names\x09argumentss\x04\0\x09tool-call\x03\0\x04\x01\
+ks\x01p\x05\x01r\x03\x09reasoning\x06\x07contents\x0atool-calls\x07\x04\0\x08res\
+ponse\x03\0\x08\x01k\x03\x01@\x02\x08responses\x06delims\x0a\0\x09\x04\0\x05pars\
+e\x01\x0b\x04\0\x1epromptrs:parser/response@0.2.0\x05\0\x04\0\x1cpromptrs:parser\
+/parser@0.2.0\x04\0\x0b\x0c\x01\0\x06parser\x03\0\0\0G\x09producers\x01\x0cproce\
+ssed-by\x02\x0dwit-component\x070.227.1\x10wit-bindgen-rust\x060.41.0";
 #[inline(never)]
 #[doc(hidden)]
 pub fn __link_custom_section_describing_imports() {
