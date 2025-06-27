@@ -3,9 +3,9 @@ mod bindings;
 
 use bindings::exports::promptrs::parser::response::{Delims, Guest, Response, ToolCall};
 use serde::Deserialize;
-use winnow::combinator::{empty, opt, repeat, seq};
+use winnow::combinator::{alt, empty, opt, repeat, seq};
 use winnow::error::ParserError;
-use winnow::token::take_until;
+use winnow::token::{rest, take_until};
 use winnow::{Parser, Result};
 
 struct Component;
@@ -35,7 +35,7 @@ fn parse(input: &mut &str, delims: Option<Delims>) -> Result<Response> {
 	let Some(rdelims) = reasoning else {
 		return seq!(Response {
 			reasoning: empty.value(None),
-			content: take_until(0.., delims.0.as_str()).map(|s: &str| s.into()),
+			content: alt((take_until(0.., delims.0.as_str()), rest)).map(|s: &str| s.into()),
 			tool_calls: repeat(0.., between(&delims)).map(parse_args)
 		})
 		.parse_next(input);
@@ -43,7 +43,7 @@ fn parse(input: &mut &str, delims: Option<Delims>) -> Result<Response> {
 
 	seq!(Response {
 		reasoning: opt(between(&rdelims)).map(|s: Option<&str>| s.map(|s| s.into())),
-		content: take_until(0.., delims.0.as_str()).map(|s: &str| s.into()),
+		content: alt((take_until(0.., delims.0.as_str()), rest)).map(|s: &str| s.into()),
 		tool_calls: repeat(0.., between(&delims)).map(parse_args)
 	})
 	.parse_next(input)
