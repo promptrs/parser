@@ -65,13 +65,24 @@ fn between<'s, E: ParserError<&'s str>>(
 fn parse_args(list: Vec<&str>) -> Vec<ToolCall> {
 	list.into_iter()
 		.map(|tc| {
-			serde_json::from_str(tc).unwrap_or(ToolCallDef {
+			match serde_json::from_str(tc).unwrap_or(ToolCallSegment::One(ToolCallDef {
 				name: "".into(),
 				arguments: "".into(),
-			})
+			})) {
+				ToolCallSegment::One(def) => vec![def],
+				ToolCallSegment::Many(defs) => defs,
+			}
 		})
+		.flatten()
 		.map(|ToolCallDef { name, arguments }| ToolCall { name, arguments })
 		.collect()
+}
+
+#[derive(Deserialize)]
+#[serde(untagged)]
+enum ToolCallSegment {
+	One(ToolCallDef),
+	Many(Vec<ToolCallDef>),
 }
 
 #[derive(Deserialize)]
